@@ -27,7 +27,7 @@ router.get('/users/register', function(req, res, next) {
 	//res.render('index', { title: 'Express' });
 	res.sendfile('views/html/register.html')
 });
-
+ 
 router.post('/users/register',users.register);
 
 //用户路由
