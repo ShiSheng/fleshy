@@ -5,8 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+
+//database
+var mg = require('mongoose');
+var db = mg.createConnection("mongodb://127.0.0.1:27017/fleshy");
+
+var routes = require('./routes/controlls');
 
 var app = express();
 
@@ -23,7 +27,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
