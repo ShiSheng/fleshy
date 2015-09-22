@@ -3,6 +3,7 @@ var validator = require('validator');
 var tools = require('../common/tools')
 
 exports.login = function(req, res, next) {
+		
 	var loginname = validator.trim(req.body.loginname).toLowerCase();
 	//验证信息
 	if ([loginname].some(function(item) {
@@ -14,7 +15,13 @@ exports.login = function(req, res, next) {
 		if(err){
 			return next(err);
 		}
-		res.json(doc);
+		if(doc == null){
+			res.json({code:'99',msg:'无数据'});
+		}else{
+			//登录成功保存到session中
+			req.session.user = doc;
+			res.json(doc);
+		}
 	})
 }
 

@@ -14,10 +14,13 @@ res.sendfile('views/index.html')
 
 
 //登录
-
 router.get('/users/login', function(req, res, next) {
 	//res.render('index', { title: 'Express' });
-	res.sendfile('views/html/login.html')
+	if(req.session.user){//登录过
+		res.send(req.session.user.loginname+'已登录。')
+	}else{
+		res.sendfile('views/html/login.html')
+	}
 });
 
 router.post('/users/login',users.login);
